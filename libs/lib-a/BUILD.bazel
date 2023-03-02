@@ -1,0 +1,33 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "pkg_npm")
+load("//tools:index.bzl", "ts_project")
+
+
+SRCS = glob(
+    ["src/**/*.ts"],
+    exclude = ["src/**/*.spec.ts"],
+) + ["index.ts"]
+
+# Compile to JS
+ts_project(
+    name = "src",
+    srcs = SRCS,
+    tsconfig = "//:tsconfig.json",
+)
+
+# Export library to be consumed
+js_library(
+    name = "lib-a",
+    package_name = "lib-a",
+    srcs = ["package.json"],
+    visibility = ["//:__subpackages__"],
+    deps = [":src"],
+)
+
+# Create NPM Package
+pkg_npm(
+    name = "pkg",
+    package_name = "lib-a",
+    srcs = ["package.json"],
+    tgz = "lib-a.tgz",
+    deps = [":src"],
+)
