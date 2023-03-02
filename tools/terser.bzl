@@ -1,6 +1,4 @@
-"""Wrapper for minifying with terser
-"""
-
+# still couldn't test this 
 load("@npm//@bazel/terser:index.bzl", _terser_minified = "terser_minified")
 
 def terser_minified(name, src):

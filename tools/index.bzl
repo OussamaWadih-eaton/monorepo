@@ -1,5 +1,3 @@
-"""Tools used internal for this repository.
-"""
 
 load("typescript.bzl", _ts_project = "ts_project")
 

@@ -1,7 +1,7 @@
 
 
 workspace(
-    name = "repoTest",
+    name = "monorepo",
     managed_directories = {"@npm": ["node_modules"]},
 )
 
